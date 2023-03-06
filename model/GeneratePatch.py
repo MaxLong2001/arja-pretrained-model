@@ -22,10 +22,10 @@ def setup_global(bug_src, fault_json, output_json):
         PROJ_ROOT, JASPER_ROOT, FILES_ROOT, INPUT_JSON, TMP_FILE, MODEL
 
     PROJ_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    JASPER_ROOT = PROJ_ROOT + '\\jasper'
-    FILES_ROOT = PROJ_ROOT + '\\files'
-    INPUT_JSON = FILES_ROOT + '\\input.json'
-    TMP_FILE = FILES_ROOT + '\\tmp.json'
+    JASPER_ROOT = PROJ_ROOT + '/jasper'
+    FILES_ROOT = PROJ_ROOT + '/files'
+    INPUT_JSON = FILES_ROOT + '/input.json'
+    TMP_FILE = FILES_ROOT + '/tmp.json'
     MODEL = 'facebook/incoder-1B'
 
     BUG_SRC = bug_src
@@ -40,7 +40,7 @@ def get_faulty(fault_file):
     for line in fault_json:
         fault_locations.append({
             'class': line['class'],
-            'file': BUG_SRC + '\\' + line['class'].replace('.', '\\') + '.java',
+            'file': BUG_SRC + '/' + line['class'].replace('.', '/') + '.java',
             'line': line['line'],
             'suspicious': line['suspicious'],
         })
@@ -49,7 +49,7 @@ def get_faulty(fault_file):
 
 def generate_input(fault_locations, mask_config, input_file, output_file):
     incoder_input = []
-    compile_jasper()
+    # compile_jasper()
 
     for it in fault_locations:
         faulty_file = it['file']
@@ -81,18 +81,18 @@ def command(cmd):
 
 
 def compile_jasper():
-    if os.path.exists(JASPER_ROOT + '\\target'):
+    if os.path.exists(JASPER_ROOT + '/target'):
         return
     os.chdir(JASPER_ROOT)
     os.mkdir('target')
-    command(['javac', '-cp', 'lib\\*', '-d', 'target',
-             'src\\main\\java\\clm\\jasper\\*.java', 'src\\main\\java\\clm\\incoder\\*.java'])
+    command(['/root/jdk1.8/bin/javac', '-cp', 'lib/*', '-d', 'target',
+             'src/main/java/clm/jasper/*.java', 'src/main/java/clm/incoder/*.java'])
 
 
 def get_incoder_input(filename, start, end, tmp_file, config):
     os.chdir(JASPER_ROOT)
     command([
-        'java', '-cp', '\".;lib\\*;target\"', 'clm.incoder.InCoderInputParser',
+        '/root/jdk1.8/bin/java', '-cp', '.:target:lib/*', 'clm.incoder.InCoderInputParser',
         filename, str(start), str(end), config, tmp_file
     ])
 
@@ -179,9 +179,9 @@ if __name__ == '__main__':
     bug_src_arg = sys.argv[1]
     fault_json_arg = sys.argv[2]
     output_json_arg = sys.argv[3]
-    # bug_src_arg = 'D:\\PyCharmProject\\test-packages\\buggy\\Math\\math_98_buggy\\src\\main\\java'
-    # fault_json_arg = 'D:\\PyCharmProject\\arja-pretrained-model\\files\\faults.json'
-    # output_json_arg = 'D:\\PyCharmProject\\arja-pretrained-model\\files\\output.json'
+    # bug_src_arg = '/root/d4j-projs/Math/math_98_buggy/src/main/java'
+    # fault_json_arg = '/root/codefix/arja-pretrained-model/files/faults.json'
+    # output_json_arg = '/root/codefix/arja-pretrained-model/files/output.json'
     print('arja-pretrained-model: bug_src: ', bug_src_arg)
     print('arja-pretrained-model: fault_json: ', fault_json_arg)
     print('arja-pretrained-model: output_json: ', output_json_arg)
