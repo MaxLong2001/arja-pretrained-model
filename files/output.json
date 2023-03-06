@@ -1,0 +1,205 @@
+[
+    {
+        "class": "org.apache.commons.math.linear.RealMatrixImpl",
+        "loc": 786,
+        "generation": [
+            "data[row] = sum;",
+            "sum = Math.sqrt(sum);",
+            "data[row] = sum / nCols;",
+            "System.arraycopy(v, 0, out, i, sum);"
+        ]
+    },
+    {
+        "class": "org.apache.commons.math.linear.BigMatrixImpl",
+        "loc": 989,
+        "generation": [
+            "final int nCols = this.getColumnDimension();",
+            "BigDecimal[] out = new BigDecimal[v.length];",
+            "final int nRows = v.length;",
+            "final int nRows = this.getRowDimension();",
+            "final BigDecimal[] out = new BigDecimal[v.length];"
+        ]
+    },
+    {
+        "class": "org.apache.commons.math.linear.BigMatrixImpl",
+        "loc": 956,
+        "generation": [
+            "synchronized (this) {\n      return columnDimension;\n    }"
+        ]
+    },
+    {
+        "class": "org.apache.commons.math.linear.RealMatrixImpl",
+        "loc": 775,
+        "generation": [
+            "final int nCols = this.getColumnDimension();",
+            "final int nCols = this.getColDimension();"
+        ]
+    },
+    {
+        "class": "org.apache.commons.math.linear.RealMatrixImpl",
+        "loc": 776,
+        "generation": [
+            "final double[] data = this.getData();",
+            "final double[] data = this.data;"
+        ]
+    },
+    {
+        "class": "org.apache.commons.math.linear.RealMatrixImpl",
+        "loc": 779,
+        "generation": [
+            "double[] out = new double[nRows];",
+            "final double[] out = new double[nRows];"
+        ]
+    },
+    {
+        "class": "org.apache.commons.math.linear.BigMatrixImpl",
+        "loc": 947,
+        "generation": [
+            "Log.d(TAG, \"getRowDimension\");",
+            "final int width = getWidth();"
+        ]
+    },
+    {
+        "class": "org.apache.commons.math.linear.BigMatrixImpl",
+        "loc": 997,
+        "generation": [
+            "out.add(sum);",
+            "data[row] = sum.toBigDecimalArray();",
+            "data[row] = sum;",
+            "sum = new BigDecimal(sum);",
+            "data[row] = new BigDecimal[]{sum};",
+            "data[row] = new BigDecimal[] { sum };"
+        ]
+    },
+    {
+        "class": "org.apache.commons.math.linear.BigMatrixImpl",
+        "loc": 995,
+        "generation": [
+            "sum = sum.add(v[i]);",
+            "sum = sum.add(v[row * nCols + i]);",
+            "sum = sum.add(this.get(row, i));",
+            "sum = sum.add(v[row][i]);",
+            "sum = sum.add(v[row + i]);"
+        ]
+    },
+    {
+        "class": "org.apache.commons.math.linear.BigMatrixImpl",
+        "loc": 994,
+        "generation": [
+            "for(int col = 0; col < nCols; col++) {\n            sum = sum.add(v[row][col]);\n        }",
+            "sum.setScale(nCols);",
+            "BigDecimal sum = ZERO;",
+            "BigDecimal product = ONE;",
+            "BigDecimal product = ZERO;"
+        ]
+    },
+    {
+        "class": "org.apache.commons.math.linear.BigMatrixImpl",
+        "loc": 993,
+        "generation": [
+            "BigDecimal sum = new BigDecimal(0);",
+            "final BigDecimal sum = new BigDecimal(0);",
+            "BigDecimal sum = BigDecimal.ZERO;"
+        ]
+    },
+    {
+        "class": "org.apache.commons.math.linear.BigMatrixImpl",
+        "loc": 992,
+        "generation": [
+            "for(int row = 0; row < nRows; row++) {\n        BigDecimal sum = ZERO;\n        for (int i = 0; i < nCols; i++) {\n            sum = sum.add(data[row][i].multiply(v[i]));\n        }\n        out[row] = sum;\n    }",
+            "for(int row = 0; row < nRows; row++) {\n        BigDecimal sum = ZERO;\n        for (int i = 0; i < nCols; i++) {\n            sum = sum.add(data[row][i]);\n        }\n        out[row] = sum;\n    }",
+            "for(int row = 0; row < nRows; row++) {\n        BigDecimal sum = ZERO;\n        for (int i = 0; i < nCols; i++) {\n            sum = sum.add(v[i].multiply(data[row][i]));\n        }\n        out[row] = sum;\n    }",
+            "Arrays.fill(out, BigDecimal.ZERO);",
+            "System.arraycopy(v, 0, out, 0, v.length);",
+            "for(int row = 0; row < nRows; row++) {\n        BigDecimal sum = ZERO;\n        for (int col = 0; col < nCols; col++) {\n            sum = sum.add(data[row][col].multiply(v[col]));\n        }\n        out[row] = sum;\n    }",
+            "for(int row = 0; row < nRows; row++) {\n        BigDecimal sum = ZERO;\n        for (int i = 0; i < nCols; i++) {\n            sum = sum.add(v[i]);\n        }\n        out[row] = sum;\n    }"
+        ]
+    },
+    {
+        "class": "org.apache.commons.math.linear.BigMatrixImpl",
+        "loc": 986,
+        "generation": [
+            "final int nRows = this.getRowDimension();"
+        ]
+    },
+    {
+        "class": "org.apache.commons.math.linear.BigMatrixImpl",
+        "loc": 991,
+        "generation": [
+            "BigDecimal[] out = new BigDecimal[nRows];",
+            "final BigDecimal[] out = new BigDecimal[nRows];",
+            "BigDecimal[] out = new BigDecimal[nRows * nCols];"
+        ]
+    },
+    {
+        "class": "org.apache.commons.math.linear.BigMatrixImpl",
+        "loc": 990,
+        "generation": [
+            "final int nCols = v.length;",
+            "BigDecimal[] out = new BigDecimal[nRows];",
+            "final int nCols = this.getColumnDimension();"
+        ]
+    },
+    {
+        "class": "org.apache.commons.math.linear.RealMatrixImpl",
+        "loc": 781,
+        "generation": [
+            "double sum = 0;",
+            "final double[] dataRow = this.getRow(row);"
+        ]
+    },
+    {
+        "class": "org.apache.commons.math.linear.RealMatrixImpl",
+        "loc": 780,
+        "generation": [
+            "for(int row = 0; row < nRows; row++) {\n        final double[] dataRow = data[row];\n        double sum = 0;\n        for (int i = 0; i < nCols; i++) {\n            sum += dataRow[i] * v[i];\n        }\n        out[row] = sum;\n    }",
+            "double[] data = this.data;",
+            "System.arraycopy(v, 0, out, 0, v.length);",
+            "Arrays.fill(out, 0.0);",
+            "final double[] data = this.data;",
+            "for(int row = 0; row < nRows; row++) {\n        final double[] dataRow = data[row];\n        for(int i = 0; i < nCols; i++) {\n            out[i] = dataRow[i] * v[i];\n        }\n    }",
+            "for(int row = 0; row < nRows; row++) {\n        final double[] dataRow = data[row];\n        for (int i = 0; i < nCols; i++) {\n            out[i] = dataRow[i] * v[i];\n        }\n    }"
+        ]
+    },
+    {
+        "class": "org.apache.commons.math.linear.RealMatrixImpl",
+        "loc": 783,
+        "generation": [
+            "for(int i = 0; i < v.length; i++) {\n            sum += dataRow[i] * v[i];\n        }",
+            "for(int col = 0; col < nCols; col++) {\n            sum += dataRow[col] * v[col];\n        }",
+            "for(int i = 0; i < nCols; i++) {\n            sum += dataRow[i] * v[i];\n        }",
+            "for(int i=0; i < v.length; i++) {\n            sum += dataRow[i] * v[i];\n        }",
+            "for(int i = 0; i < nCols; i++){\n            sum += dataRow[i] * v[i];\n        }",
+            "for(int i=0; i < nCols; i++) {\n            sum += dataRow[i] * v[i];\n        }",
+            "for(int i=0; i < nCols; i++){\n            sum += dataRow[i] * v[i];\n        }",
+            "double sum2 = 0;"
+        ]
+    },
+    {
+        "class": "org.apache.commons.math.linear.RealMatrixImpl",
+        "loc": 774,
+        "generation": [
+            "final int nRows = this.getRowDimension();",
+            "final int nCols = this.getColumnDimension();"
+        ]
+    },
+    {
+        "class": "org.apache.commons.math.linear.RealMatrixImpl",
+        "loc": 782,
+        "generation": [
+            "double sum = 0.0;",
+            "final double sum = 0.0;",
+            "double sum = 0;",
+            "final double sum = 0;"
+        ]
+    },
+    {
+        "class": "org.apache.commons.math.linear.RealMatrixImpl",
+        "loc": 784,
+        "generation": [
+            "sum += dataRow[i];",
+            "sum += dataRow[i] * v[i];",
+            "sum += v[i] * dataRow[i];"
+        ]
+    }
+]
