@@ -1,7 +1,6 @@
 import json
 import os
 import subprocess
-import sys
 
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
@@ -63,6 +62,7 @@ def generate_input(fault_locations, mask_config, input_file, output_file):
                 'class': faulty_class,
                 'file': faulty_file,
                 'loc': '' + str(line) + '-' + str(line),
+                'config': config,
                 'input': result['input'],
                 'range': result['function range'],
             })
@@ -112,6 +112,7 @@ def generate_patch(input_file,
         content = item['input']
         loc = int(item['loc'].split('-')[0])
         faulty_class = item['class']
+        config = item['config']
         print(faulty_class, '#', loc)
 
         input_ids = tokenizer(content, return_tensors="pt").input_ids
@@ -129,11 +130,16 @@ def generate_patch(input_file,
             early_stopping=True, pad_token_id=eos_id, eos_token_id=eos_id
         )
 
-        json_generation = {'class': faulty_class, 'loc': loc, 'generation': []}
+        json_generation = {'class': faulty_class,
+                           'loc': loc,
+                           'config': config,
+                           'generation': []}
         generation_set = set()
         for generated_id in generated_ids:
             generation = tokenizer.decode(generated_id, skip_special_tokens=False, clean_up_tokenization_spaces=False)
             generation = parse_generation(generation)
+            if len(generation) == 0:
+                continue
             if generation not in generation_set:
                 generation_set.add(generation)
                 json_generation['generation'].append(generation)
@@ -145,6 +151,7 @@ def generate_patch(input_file,
 
 def parse_generation(output):
     generation = output.split('<|mask:0|>')[-1]
+    generation = generation.strip()
     result_str = ''
     if generation.startswith('if') or generation.startswith('for') or generation.startswith('while') or \
             generation.startswith("switch") or (generation.startswith("do") and not generation.startswith("double")) \
@@ -159,6 +166,8 @@ def parse_generation(output):
             if lbrace_cnt == rbrace_cnt and lbrace_cnt != 0:
                 result_str = generation[:i + 1]
                 break
+    elif generation.startswith(')') or generation.startswith(']') or generation.startswith('}'):
+        result_str = ''
     else:
         result_str = generation.split(';')[0] + ';'
     return result_str
@@ -167,44 +176,3 @@ def parse_generation(output):
 def cleanup_file(file):
     if os.path.exists(file):
         os.remove(file)
-
-
-if __name__ == '__main__':
-    # necessary args: fault_json, bug_src, output_json
-    if len(sys.argv) != 4:
-        print('arja-pretrained-model: invalid argument number, expected 3, got ', len(sys.argv) - 1)
-        exit(1)
-
-    print('arja-pretrained-model: getting args')
-    bug_src_arg = sys.argv[1]
-    fault_json_arg = sys.argv[2]
-    output_json_arg = sys.argv[3]
-    # bug_src_arg = 'D:\\PyCharmProject\\test-packages\\buggy\\Math\\math_98_buggy\\src\\main\\java'
-    # fault_json_arg = 'D:\\PyCharmProject\\arja-pretrained-model\\files\\faults.json'
-    # output_json_arg = 'D:\\PyCharmProject\\arja-pretrained-model\\files\\output.json'
-    print('arja-pretrained-model: bug_src: ', bug_src_arg)
-    print('arja-pretrained-model: fault_json: ', fault_json_arg)
-    print('arja-pretrained-model: output_json: ', output_json_arg)
-
-    print('arja-pretrained-model: setting up global variables')
-    setup_global(bug_src=bug_src_arg,
-                 fault_json=fault_json_arg,
-                 output_json=output_json_arg)
-
-    print('arja-pretrained-model: getting faulty')
-    faulty = get_faulty(fault_file=FAULT_JSON)
-
-    print('arja-pretrained-model: generating input')
-    generate_input(fault_locations=faulty,
-                   mask_config={'MASK_ON'},
-                   input_file=TMP_FILE,
-                   output_file=INPUT_JSON)
-
-    print('arja-pretrained-model: generating patch')
-    generate_patch(input_file=INPUT_JSON,
-                   output_file=OUTPUT_JSON,
-                   model_name=MODEL,
-                   num_output=10)
-
-    print('arja-pretrained-model: cleaning up')
-    cleanup_file(TMP_FILE)
