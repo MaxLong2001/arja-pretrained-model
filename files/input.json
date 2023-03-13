@@ -1,149 +1,506 @@
 [
     {
         "class": "org.apache.commons.math.linear.RealMatrixImpl",
-        "file": "/root/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
         "loc": "786-786",
+        "config": "MASK_AFTER",
+        "input": "public double[] operate(double[] v) throws IllegalArgumentException {\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    if (v.length != nCols) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final double[] out = new double[v.length];\n    for (int row = 0; row < nRows; row++) {\n        final double[] dataRow = data[row];\n        double sum = 0;\n        for (int i = 0; i < nCols; i++) {\n            sum += dataRow[i] * v[i];\n        }\n        out[row] = sum;\n        <|mask:0|>\n    }\n    return out;\n}\n<|mask:0|>",
+        "range": "773,5-789,5"
+    },
+    {
+        "class": "org.apache.commons.math.linear.RealMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
+        "loc": "786-786",
+        "config": "MASK_ON",
         "input": "public double[] operate(double[] v) throws IllegalArgumentException {\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    if (v.length != nCols) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final double[] out = new double[v.length];\n    for (int row = 0; row < nRows; row++) {\n        final double[] dataRow = data[row];\n        double sum = 0;\n        for (int i = 0; i < nCols; i++) {\n            sum += dataRow[i] * v[i];\n        }\n        <|mask:0|>\n    }\n    return out;\n}\n<|mask:0|>",
         "range": "773,5-789,5"
     },
     {
+        "class": "org.apache.commons.math.linear.RealMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
+        "loc": "786-786",
+        "config": "MASK_BEFORE",
+        "input": "public double[] operate(double[] v) throws IllegalArgumentException {\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    if (v.length != nCols) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final double[] out = new double[v.length];\n    for (int row = 0; row < nRows; row++) {\n        final double[] dataRow = data[row];\n        double sum = 0;\n        for (int i = 0; i < nCols; i++) {\n            sum += dataRow[i] * v[i];\n        }\n        <|mask:0|>\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
+        "range": "773,5-789,5"
+    },
+    {
         "class": "org.apache.commons.math.linear.BigMatrixImpl",
-        "file": "/root/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
         "loc": "989-989",
+        "config": "MASK_AFTER",
+        "input": "public BigDecimal[] operate(BigDecimal[] v) throws IllegalArgumentException {\n    if (v.length != this.getColumnDimension()) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final int nRows = this.getRowDimension();\n    <|mask:0|>\n    final int nCols = this.getColumnDimension();\n    final BigDecimal[] out = new BigDecimal[v.length];\n    for (int row = 0; row < nRows; row++) {\n        BigDecimal sum = ZERO;\n        for (int i = 0; i < nCols; i++) {\n            sum = sum.add(data[row][i].multiply(v[i]));\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
+        "range": "985,5-1000,5"
+    },
+    {
+        "class": "org.apache.commons.math.linear.BigMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
+        "loc": "989-989",
+        "config": "MASK_ON",
         "input": "public BigDecimal[] operate(BigDecimal[] v) throws IllegalArgumentException {\n    if (v.length != this.getColumnDimension()) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    <|mask:0|>\n    final int nCols = this.getColumnDimension();\n    final BigDecimal[] out = new BigDecimal[v.length];\n    for (int row = 0; row < nRows; row++) {\n        BigDecimal sum = ZERO;\n        for (int i = 0; i < nCols; i++) {\n            sum = sum.add(data[row][i].multiply(v[i]));\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
         "range": "985,5-1000,5"
     },
     {
         "class": "org.apache.commons.math.linear.BigMatrixImpl",
-        "file": "/root/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
+        "loc": "989-989",
+        "config": "MASK_BEFORE",
+        "input": "public BigDecimal[] operate(BigDecimal[] v) throws IllegalArgumentException {\n    if (v.length != this.getColumnDimension()) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    <|mask:0|>\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    final BigDecimal[] out = new BigDecimal[v.length];\n    for (int row = 0; row < nRows; row++) {\n        BigDecimal sum = ZERO;\n        for (int i = 0; i < nCols; i++) {\n            sum = sum.add(data[row][i].multiply(v[i]));\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
+        "range": "985,5-1000,5"
+    },
+    {
+        "class": "org.apache.commons.math.linear.BigMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
         "loc": "956-956",
+        "config": "MASK_AFTER",
+        "input": "public int getColumnDimension() {\n    return data[0].length;\n    <|mask:0|>\n}\n<|mask:0|>",
+        "range": "955,5-957,5"
+    },
+    {
+        "class": "org.apache.commons.math.linear.BigMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
+        "loc": "956-956",
+        "config": "MASK_ON",
         "input": "public int getColumnDimension() {\n    <|mask:0|>\n}\n<|mask:0|>",
         "range": "955,5-957,5"
     },
     {
+        "class": "org.apache.commons.math.linear.BigMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
+        "loc": "956-956",
+        "config": "MASK_BEFORE",
+        "input": "public int getColumnDimension() {\n    <|mask:0|>\n    return data[0].length;\n}\n<|mask:0|>",
+        "range": "955,5-957,5"
+    },
+    {
         "class": "org.apache.commons.math.linear.RealMatrixImpl",
-        "file": "/root/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
         "loc": "775-775",
+        "config": "MASK_AFTER",
+        "input": "public double[] operate(double[] v) throws IllegalArgumentException {\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    <|mask:0|>\n    if (v.length != nCols) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final double[] out = new double[v.length];\n    for (int row = 0; row < nRows; row++) {\n        final double[] dataRow = data[row];\n        double sum = 0;\n        for (int i = 0; i < nCols; i++) {\n            sum += dataRow[i] * v[i];\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
+        "range": "773,5-789,5"
+    },
+    {
+        "class": "org.apache.commons.math.linear.RealMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
+        "loc": "775-775",
+        "config": "MASK_ON",
         "input": "public double[] operate(double[] v) throws IllegalArgumentException {\n    final int nRows = this.getRowDimension();\n    <|mask:0|>\n    if (v.length != nCols) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final double[] out = new double[v.length];\n    for (int row = 0; row < nRows; row++) {\n        final double[] dataRow = data[row];\n        double sum = 0;\n        for (int i = 0; i < nCols; i++) {\n            sum += dataRow[i] * v[i];\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
         "range": "773,5-789,5"
     },
     {
         "class": "org.apache.commons.math.linear.RealMatrixImpl",
-        "file": "/root/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
+        "loc": "775-775",
+        "config": "MASK_BEFORE",
+        "input": "public double[] operate(double[] v) throws IllegalArgumentException {\n    final int nRows = this.getRowDimension();\n    <|mask:0|>\n    final int nCols = this.getColumnDimension();\n    if (v.length != nCols) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final double[] out = new double[v.length];\n    for (int row = 0; row < nRows; row++) {\n        final double[] dataRow = data[row];\n        double sum = 0;\n        for (int i = 0; i < nCols; i++) {\n            sum += dataRow[i] * v[i];\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
+        "range": "773,5-789,5"
+    },
+    {
+        "class": "org.apache.commons.math.linear.RealMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
         "loc": "776-776",
+        "config": "MASK_AFTER",
+        "input": "public double[] operate(double[] v) throws IllegalArgumentException {\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    if (v.length != nCols) {\n    <|mask:0|>\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final double[] out = new double[v.length];\n    for (int row = 0; row < nRows; row++) {\n        final double[] dataRow = data[row];\n        double sum = 0;\n        for (int i = 0; i < nCols; i++) {\n            sum += dataRow[i] * v[i];\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
+        "range": "773,5-789,5"
+    },
+    {
+        "class": "org.apache.commons.math.linear.RealMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
+        "loc": "776-776",
+        "config": "MASK_ON",
         "input": "public double[] operate(double[] v) throws IllegalArgumentException {\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    <|mask:0|>\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final double[] out = new double[v.length];\n    for (int row = 0; row < nRows; row++) {\n        final double[] dataRow = data[row];\n        double sum = 0;\n        for (int i = 0; i < nCols; i++) {\n            sum += dataRow[i] * v[i];\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
         "range": "773,5-789,5"
     },
     {
         "class": "org.apache.commons.math.linear.RealMatrixImpl",
-        "file": "/root/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
+        "loc": "776-776",
+        "config": "MASK_BEFORE",
+        "input": "public double[] operate(double[] v) throws IllegalArgumentException {\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    <|mask:0|>\n    if (v.length != nCols) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final double[] out = new double[v.length];\n    for (int row = 0; row < nRows; row++) {\n        final double[] dataRow = data[row];\n        double sum = 0;\n        for (int i = 0; i < nCols; i++) {\n            sum += dataRow[i] * v[i];\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
+        "range": "773,5-789,5"
+    },
+    {
+        "class": "org.apache.commons.math.linear.RealMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
         "loc": "779-779",
+        "config": "MASK_AFTER",
+        "input": "public double[] operate(double[] v) throws IllegalArgumentException {\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    if (v.length != nCols) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final double[] out = new double[v.length];\n    <|mask:0|>\n    for (int row = 0; row < nRows; row++) {\n        final double[] dataRow = data[row];\n        double sum = 0;\n        for (int i = 0; i < nCols; i++) {\n            sum += dataRow[i] * v[i];\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
+        "range": "773,5-789,5"
+    },
+    {
+        "class": "org.apache.commons.math.linear.RealMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
+        "loc": "779-779",
+        "config": "MASK_ON",
         "input": "public double[] operate(double[] v) throws IllegalArgumentException {\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    if (v.length != nCols) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    <|mask:0|>\n    for (int row = 0; row < nRows; row++) {\n        final double[] dataRow = data[row];\n        double sum = 0;\n        for (int i = 0; i < nCols; i++) {\n            sum += dataRow[i] * v[i];\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
         "range": "773,5-789,5"
     },
     {
+        "class": "org.apache.commons.math.linear.RealMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
+        "loc": "779-779",
+        "config": "MASK_BEFORE",
+        "input": "public double[] operate(double[] v) throws IllegalArgumentException {\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    if (v.length != nCols) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    <|mask:0|>\n    final double[] out = new double[v.length];\n    for (int row = 0; row < nRows; row++) {\n        final double[] dataRow = data[row];\n        double sum = 0;\n        for (int i = 0; i < nCols; i++) {\n            sum += dataRow[i] * v[i];\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
+        "range": "773,5-789,5"
+    },
+    {
         "class": "org.apache.commons.math.linear.BigMatrixImpl",
-        "file": "/root/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
         "loc": "947-947",
+        "config": "MASK_AFTER",
+        "input": "public int getRowDimension() {\n    return data.length;\n    <|mask:0|>\n}\n<|mask:0|>",
+        "range": "946,5-948,5"
+    },
+    {
+        "class": "org.apache.commons.math.linear.BigMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
+        "loc": "947-947",
+        "config": "MASK_ON",
         "input": "public int getRowDimension() {\n    <|mask:0|>\n}\n<|mask:0|>",
         "range": "946,5-948,5"
     },
     {
         "class": "org.apache.commons.math.linear.BigMatrixImpl",
-        "file": "/root/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
+        "loc": "947-947",
+        "config": "MASK_BEFORE",
+        "input": "public int getRowDimension() {\n    <|mask:0|>\n    return data.length;\n}\n<|mask:0|>",
+        "range": "946,5-948,5"
+    },
+    {
+        "class": "org.apache.commons.math.linear.BigMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
         "loc": "997-997",
+        "config": "MASK_AFTER",
+        "input": "public BigDecimal[] operate(BigDecimal[] v) throws IllegalArgumentException {\n    if (v.length != this.getColumnDimension()) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    final BigDecimal[] out = new BigDecimal[v.length];\n    for (int row = 0; row < nRows; row++) {\n        BigDecimal sum = ZERO;\n        for (int i = 0; i < nCols; i++) {\n            sum = sum.add(data[row][i].multiply(v[i]));\n        }\n        out[row] = sum;\n        <|mask:0|>\n    }\n    return out;\n}\n<|mask:0|>",
+        "range": "985,5-1000,5"
+    },
+    {
+        "class": "org.apache.commons.math.linear.BigMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
+        "loc": "997-997",
+        "config": "MASK_ON",
         "input": "public BigDecimal[] operate(BigDecimal[] v) throws IllegalArgumentException {\n    if (v.length != this.getColumnDimension()) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    final BigDecimal[] out = new BigDecimal[v.length];\n    for (int row = 0; row < nRows; row++) {\n        BigDecimal sum = ZERO;\n        for (int i = 0; i < nCols; i++) {\n            sum = sum.add(data[row][i].multiply(v[i]));\n        }\n        <|mask:0|>\n    }\n    return out;\n}\n<|mask:0|>",
         "range": "985,5-1000,5"
     },
     {
         "class": "org.apache.commons.math.linear.BigMatrixImpl",
-        "file": "/root/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
+        "loc": "997-997",
+        "config": "MASK_BEFORE",
+        "input": "public BigDecimal[] operate(BigDecimal[] v) throws IllegalArgumentException {\n    if (v.length != this.getColumnDimension()) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    final BigDecimal[] out = new BigDecimal[v.length];\n    for (int row = 0; row < nRows; row++) {\n        BigDecimal sum = ZERO;\n        for (int i = 0; i < nCols; i++) {\n            sum = sum.add(data[row][i].multiply(v[i]));\n        }\n        <|mask:0|>\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
+        "range": "985,5-1000,5"
+    },
+    {
+        "class": "org.apache.commons.math.linear.BigMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
         "loc": "995-995",
+        "config": "MASK_AFTER",
+        "input": "public BigDecimal[] operate(BigDecimal[] v) throws IllegalArgumentException {\n    if (v.length != this.getColumnDimension()) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    final BigDecimal[] out = new BigDecimal[v.length];\n    for (int row = 0; row < nRows; row++) {\n        BigDecimal sum = ZERO;\n        for (int i = 0; i < nCols; i++) {\n            sum = sum.add(data[row][i].multiply(v[i]));\n            <|mask:0|>\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
+        "range": "985,5-1000,5"
+    },
+    {
+        "class": "org.apache.commons.math.linear.BigMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
+        "loc": "995-995",
+        "config": "MASK_ON",
         "input": "public BigDecimal[] operate(BigDecimal[] v) throws IllegalArgumentException {\n    if (v.length != this.getColumnDimension()) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    final BigDecimal[] out = new BigDecimal[v.length];\n    for (int row = 0; row < nRows; row++) {\n        BigDecimal sum = ZERO;\n        for (int i = 0; i < nCols; i++) {\n            <|mask:0|>\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
         "range": "985,5-1000,5"
     },
     {
         "class": "org.apache.commons.math.linear.BigMatrixImpl",
-        "file": "/root/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
+        "loc": "995-995",
+        "config": "MASK_BEFORE",
+        "input": "public BigDecimal[] operate(BigDecimal[] v) throws IllegalArgumentException {\n    if (v.length != this.getColumnDimension()) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    final BigDecimal[] out = new BigDecimal[v.length];\n    for (int row = 0; row < nRows; row++) {\n        BigDecimal sum = ZERO;\n        for (int i = 0; i < nCols; i++) {\n            <|mask:0|>\n            sum = sum.add(data[row][i].multiply(v[i]));\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
+        "range": "985,5-1000,5"
+    },
+    {
+        "class": "org.apache.commons.math.linear.BigMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
         "loc": "994-994",
+        "config": "MASK_AFTER",
+        "input": "public BigDecimal[] operate(BigDecimal[] v) throws IllegalArgumentException {\n    if (v.length != this.getColumnDimension()) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    final BigDecimal[] out = new BigDecimal[v.length];\n    for (int row = 0; row < nRows; row++) {\n        BigDecimal sum = ZERO;\n        for (int i = 0; i < nCols; i++) {\n        <|mask:0|>\n            sum = sum.add(data[row][i].multiply(v[i]));\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
+        "range": "985,5-1000,5"
+    },
+    {
+        "class": "org.apache.commons.math.linear.BigMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
+        "loc": "994-994",
+        "config": "MASK_ON",
         "input": "public BigDecimal[] operate(BigDecimal[] v) throws IllegalArgumentException {\n    if (v.length != this.getColumnDimension()) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    final BigDecimal[] out = new BigDecimal[v.length];\n    for (int row = 0; row < nRows; row++) {\n        BigDecimal sum = ZERO;\n        <|mask:0|>\n            sum = sum.add(data[row][i].multiply(v[i]));\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
         "range": "985,5-1000,5"
     },
     {
         "class": "org.apache.commons.math.linear.BigMatrixImpl",
-        "file": "/root/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
+        "loc": "994-994",
+        "config": "MASK_BEFORE",
+        "input": "public BigDecimal[] operate(BigDecimal[] v) throws IllegalArgumentException {\n    if (v.length != this.getColumnDimension()) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    final BigDecimal[] out = new BigDecimal[v.length];\n    for (int row = 0; row < nRows; row++) {\n        BigDecimal sum = ZERO;\n        <|mask:0|>\n        for (int i = 0; i < nCols; i++) {\n            sum = sum.add(data[row][i].multiply(v[i]));\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
+        "range": "985,5-1000,5"
+    },
+    {
+        "class": "org.apache.commons.math.linear.BigMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
         "loc": "993-993",
+        "config": "MASK_AFTER",
+        "input": "public BigDecimal[] operate(BigDecimal[] v) throws IllegalArgumentException {\n    if (v.length != this.getColumnDimension()) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    final BigDecimal[] out = new BigDecimal[v.length];\n    for (int row = 0; row < nRows; row++) {\n        BigDecimal sum = ZERO;\n        <|mask:0|>\n        for (int i = 0; i < nCols; i++) {\n            sum = sum.add(data[row][i].multiply(v[i]));\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
+        "range": "985,5-1000,5"
+    },
+    {
+        "class": "org.apache.commons.math.linear.BigMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
+        "loc": "993-993",
+        "config": "MASK_ON",
         "input": "public BigDecimal[] operate(BigDecimal[] v) throws IllegalArgumentException {\n    if (v.length != this.getColumnDimension()) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    final BigDecimal[] out = new BigDecimal[v.length];\n    for (int row = 0; row < nRows; row++) {\n        <|mask:0|>\n        for (int i = 0; i < nCols; i++) {\n            sum = sum.add(data[row][i].multiply(v[i]));\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
         "range": "985,5-1000,5"
     },
     {
         "class": "org.apache.commons.math.linear.BigMatrixImpl",
-        "file": "/root/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
+        "loc": "993-993",
+        "config": "MASK_BEFORE",
+        "input": "public BigDecimal[] operate(BigDecimal[] v) throws IllegalArgumentException {\n    if (v.length != this.getColumnDimension()) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    final BigDecimal[] out = new BigDecimal[v.length];\n    for (int row = 0; row < nRows; row++) {\n        <|mask:0|>\n        BigDecimal sum = ZERO;\n        for (int i = 0; i < nCols; i++) {\n            sum = sum.add(data[row][i].multiply(v[i]));\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
+        "range": "985,5-1000,5"
+    },
+    {
+        "class": "org.apache.commons.math.linear.BigMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
         "loc": "992-992",
+        "config": "MASK_AFTER",
+        "input": "public BigDecimal[] operate(BigDecimal[] v) throws IllegalArgumentException {\n    if (v.length != this.getColumnDimension()) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    final BigDecimal[] out = new BigDecimal[v.length];\n    for (int row = 0; row < nRows; row++) {\n    <|mask:0|>\n        BigDecimal sum = ZERO;\n        for (int i = 0; i < nCols; i++) {\n            sum = sum.add(data[row][i].multiply(v[i]));\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
+        "range": "985,5-1000,5"
+    },
+    {
+        "class": "org.apache.commons.math.linear.BigMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
+        "loc": "992-992",
+        "config": "MASK_ON",
         "input": "public BigDecimal[] operate(BigDecimal[] v) throws IllegalArgumentException {\n    if (v.length != this.getColumnDimension()) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    final BigDecimal[] out = new BigDecimal[v.length];\n    <|mask:0|>\n        BigDecimal sum = ZERO;\n        for (int i = 0; i < nCols; i++) {\n            sum = sum.add(data[row][i].multiply(v[i]));\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
         "range": "985,5-1000,5"
     },
     {
         "class": "org.apache.commons.math.linear.BigMatrixImpl",
-        "file": "/root/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
+        "loc": "992-992",
+        "config": "MASK_BEFORE",
+        "input": "public BigDecimal[] operate(BigDecimal[] v) throws IllegalArgumentException {\n    if (v.length != this.getColumnDimension()) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    final BigDecimal[] out = new BigDecimal[v.length];\n    <|mask:0|>\n    for (int row = 0; row < nRows; row++) {\n        BigDecimal sum = ZERO;\n        for (int i = 0; i < nCols; i++) {\n            sum = sum.add(data[row][i].multiply(v[i]));\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
+        "range": "985,5-1000,5"
+    },
+    {
+        "class": "org.apache.commons.math.linear.BigMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
         "loc": "986-986",
+        "config": "MASK_AFTER",
+        "input": "public BigDecimal[] operate(BigDecimal[] v) throws IllegalArgumentException {\n    if (v.length != this.getColumnDimension()) {\n    <|mask:0|>\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    final BigDecimal[] out = new BigDecimal[v.length];\n    for (int row = 0; row < nRows; row++) {\n        BigDecimal sum = ZERO;\n        for (int i = 0; i < nCols; i++) {\n            sum = sum.add(data[row][i].multiply(v[i]));\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
+        "range": "985,5-1000,5"
+    },
+    {
+        "class": "org.apache.commons.math.linear.BigMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
+        "loc": "986-986",
+        "config": "MASK_ON",
         "input": "public BigDecimal[] operate(BigDecimal[] v) throws IllegalArgumentException {\n    <|mask:0|>\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    final BigDecimal[] out = new BigDecimal[v.length];\n    for (int row = 0; row < nRows; row++) {\n        BigDecimal sum = ZERO;\n        for (int i = 0; i < nCols; i++) {\n            sum = sum.add(data[row][i].multiply(v[i]));\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
         "range": "985,5-1000,5"
     },
     {
         "class": "org.apache.commons.math.linear.BigMatrixImpl",
-        "file": "/root/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
+        "loc": "986-986",
+        "config": "MASK_BEFORE",
+        "input": "public BigDecimal[] operate(BigDecimal[] v) throws IllegalArgumentException {\n    <|mask:0|>\n    if (v.length != this.getColumnDimension()) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    final BigDecimal[] out = new BigDecimal[v.length];\n    for (int row = 0; row < nRows; row++) {\n        BigDecimal sum = ZERO;\n        for (int i = 0; i < nCols; i++) {\n            sum = sum.add(data[row][i].multiply(v[i]));\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
+        "range": "985,5-1000,5"
+    },
+    {
+        "class": "org.apache.commons.math.linear.BigMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
         "loc": "991-991",
+        "config": "MASK_AFTER",
+        "input": "public BigDecimal[] operate(BigDecimal[] v) throws IllegalArgumentException {\n    if (v.length != this.getColumnDimension()) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    final BigDecimal[] out = new BigDecimal[v.length];\n    <|mask:0|>\n    for (int row = 0; row < nRows; row++) {\n        BigDecimal sum = ZERO;\n        for (int i = 0; i < nCols; i++) {\n            sum = sum.add(data[row][i].multiply(v[i]));\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
+        "range": "985,5-1000,5"
+    },
+    {
+        "class": "org.apache.commons.math.linear.BigMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
+        "loc": "991-991",
+        "config": "MASK_ON",
         "input": "public BigDecimal[] operate(BigDecimal[] v) throws IllegalArgumentException {\n    if (v.length != this.getColumnDimension()) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    <|mask:0|>\n    for (int row = 0; row < nRows; row++) {\n        BigDecimal sum = ZERO;\n        for (int i = 0; i < nCols; i++) {\n            sum = sum.add(data[row][i].multiply(v[i]));\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
         "range": "985,5-1000,5"
     },
     {
         "class": "org.apache.commons.math.linear.BigMatrixImpl",
-        "file": "/root/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
+        "loc": "991-991",
+        "config": "MASK_BEFORE",
+        "input": "public BigDecimal[] operate(BigDecimal[] v) throws IllegalArgumentException {\n    if (v.length != this.getColumnDimension()) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    <|mask:0|>\n    final BigDecimal[] out = new BigDecimal[v.length];\n    for (int row = 0; row < nRows; row++) {\n        BigDecimal sum = ZERO;\n        for (int i = 0; i < nCols; i++) {\n            sum = sum.add(data[row][i].multiply(v[i]));\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
+        "range": "985,5-1000,5"
+    },
+    {
+        "class": "org.apache.commons.math.linear.BigMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
         "loc": "990-990",
+        "config": "MASK_AFTER",
+        "input": "public BigDecimal[] operate(BigDecimal[] v) throws IllegalArgumentException {\n    if (v.length != this.getColumnDimension()) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    <|mask:0|>\n    final BigDecimal[] out = new BigDecimal[v.length];\n    for (int row = 0; row < nRows; row++) {\n        BigDecimal sum = ZERO;\n        for (int i = 0; i < nCols; i++) {\n            sum = sum.add(data[row][i].multiply(v[i]));\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
+        "range": "985,5-1000,5"
+    },
+    {
+        "class": "org.apache.commons.math.linear.BigMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
+        "loc": "990-990",
+        "config": "MASK_ON",
         "input": "public BigDecimal[] operate(BigDecimal[] v) throws IllegalArgumentException {\n    if (v.length != this.getColumnDimension()) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final int nRows = this.getRowDimension();\n    <|mask:0|>\n    final BigDecimal[] out = new BigDecimal[v.length];\n    for (int row = 0; row < nRows; row++) {\n        BigDecimal sum = ZERO;\n        for (int i = 0; i < nCols; i++) {\n            sum = sum.add(data[row][i].multiply(v[i]));\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
         "range": "985,5-1000,5"
     },
     {
+        "class": "org.apache.commons.math.linear.BigMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/BigMatrixImpl.java",
+        "loc": "990-990",
+        "config": "MASK_BEFORE",
+        "input": "public BigDecimal[] operate(BigDecimal[] v) throws IllegalArgumentException {\n    if (v.length != this.getColumnDimension()) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final int nRows = this.getRowDimension();\n    <|mask:0|>\n    final int nCols = this.getColumnDimension();\n    final BigDecimal[] out = new BigDecimal[v.length];\n    for (int row = 0; row < nRows; row++) {\n        BigDecimal sum = ZERO;\n        for (int i = 0; i < nCols; i++) {\n            sum = sum.add(data[row][i].multiply(v[i]));\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
+        "range": "985,5-1000,5"
+    },
+    {
         "class": "org.apache.commons.math.linear.RealMatrixImpl",
-        "file": "/root/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
         "loc": "781-781",
+        "config": "MASK_AFTER",
+        "input": "public double[] operate(double[] v) throws IllegalArgumentException {\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    if (v.length != nCols) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final double[] out = new double[v.length];\n    for (int row = 0; row < nRows; row++) {\n        final double[] dataRow = data[row];\n        <|mask:0|>\n        double sum = 0;\n        for (int i = 0; i < nCols; i++) {\n            sum += dataRow[i] * v[i];\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
+        "range": "773,5-789,5"
+    },
+    {
+        "class": "org.apache.commons.math.linear.RealMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
+        "loc": "781-781",
+        "config": "MASK_ON",
         "input": "public double[] operate(double[] v) throws IllegalArgumentException {\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    if (v.length != nCols) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final double[] out = new double[v.length];\n    for (int row = 0; row < nRows; row++) {\n        <|mask:0|>\n        double sum = 0;\n        for (int i = 0; i < nCols; i++) {\n            sum += dataRow[i] * v[i];\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
         "range": "773,5-789,5"
     },
     {
         "class": "org.apache.commons.math.linear.RealMatrixImpl",
-        "file": "/root/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
+        "loc": "781-781",
+        "config": "MASK_BEFORE",
+        "input": "public double[] operate(double[] v) throws IllegalArgumentException {\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    if (v.length != nCols) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final double[] out = new double[v.length];\n    for (int row = 0; row < nRows; row++) {\n        <|mask:0|>\n        final double[] dataRow = data[row];\n        double sum = 0;\n        for (int i = 0; i < nCols; i++) {\n            sum += dataRow[i] * v[i];\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
+        "range": "773,5-789,5"
+    },
+    {
+        "class": "org.apache.commons.math.linear.RealMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
         "loc": "780-780",
+        "config": "MASK_AFTER",
+        "input": "public double[] operate(double[] v) throws IllegalArgumentException {\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    if (v.length != nCols) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final double[] out = new double[v.length];\n    for (int row = 0; row < nRows; row++) {\n    <|mask:0|>\n        final double[] dataRow = data[row];\n        double sum = 0;\n        for (int i = 0; i < nCols; i++) {\n            sum += dataRow[i] * v[i];\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
+        "range": "773,5-789,5"
+    },
+    {
+        "class": "org.apache.commons.math.linear.RealMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
+        "loc": "780-780",
+        "config": "MASK_ON",
         "input": "public double[] operate(double[] v) throws IllegalArgumentException {\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    if (v.length != nCols) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final double[] out = new double[v.length];\n    <|mask:0|>\n        final double[] dataRow = data[row];\n        double sum = 0;\n        for (int i = 0; i < nCols; i++) {\n            sum += dataRow[i] * v[i];\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
         "range": "773,5-789,5"
     },
     {
         "class": "org.apache.commons.math.linear.RealMatrixImpl",
-        "file": "/root/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
+        "loc": "780-780",
+        "config": "MASK_BEFORE",
+        "input": "public double[] operate(double[] v) throws IllegalArgumentException {\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    if (v.length != nCols) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final double[] out = new double[v.length];\n    <|mask:0|>\n    for (int row = 0; row < nRows; row++) {\n        final double[] dataRow = data[row];\n        double sum = 0;\n        for (int i = 0; i < nCols; i++) {\n            sum += dataRow[i] * v[i];\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
+        "range": "773,5-789,5"
+    },
+    {
+        "class": "org.apache.commons.math.linear.RealMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
         "loc": "783-783",
+        "config": "MASK_AFTER",
+        "input": "public double[] operate(double[] v) throws IllegalArgumentException {\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    if (v.length != nCols) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final double[] out = new double[v.length];\n    for (int row = 0; row < nRows; row++) {\n        final double[] dataRow = data[row];\n        double sum = 0;\n        for (int i = 0; i < nCols; i++) {\n        <|mask:0|>\n            sum += dataRow[i] * v[i];\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
+        "range": "773,5-789,5"
+    },
+    {
+        "class": "org.apache.commons.math.linear.RealMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
+        "loc": "783-783",
+        "config": "MASK_ON",
         "input": "public double[] operate(double[] v) throws IllegalArgumentException {\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    if (v.length != nCols) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final double[] out = new double[v.length];\n    for (int row = 0; row < nRows; row++) {\n        final double[] dataRow = data[row];\n        double sum = 0;\n        <|mask:0|>\n            sum += dataRow[i] * v[i];\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
         "range": "773,5-789,5"
     },
     {
         "class": "org.apache.commons.math.linear.RealMatrixImpl",
-        "file": "/root/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
+        "loc": "783-783",
+        "config": "MASK_BEFORE",
+        "input": "public double[] operate(double[] v) throws IllegalArgumentException {\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    if (v.length != nCols) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final double[] out = new double[v.length];\n    for (int row = 0; row < nRows; row++) {\n        final double[] dataRow = data[row];\n        double sum = 0;\n        <|mask:0|>\n        for (int i = 0; i < nCols; i++) {\n            sum += dataRow[i] * v[i];\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
+        "range": "773,5-789,5"
+    },
+    {
+        "class": "org.apache.commons.math.linear.RealMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
         "loc": "774-774",
+        "config": "MASK_AFTER",
+        "input": "public double[] operate(double[] v) throws IllegalArgumentException {\n    final int nRows = this.getRowDimension();\n    <|mask:0|>\n    final int nCols = this.getColumnDimension();\n    if (v.length != nCols) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final double[] out = new double[v.length];\n    for (int row = 0; row < nRows; row++) {\n        final double[] dataRow = data[row];\n        double sum = 0;\n        for (int i = 0; i < nCols; i++) {\n            sum += dataRow[i] * v[i];\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
+        "range": "773,5-789,5"
+    },
+    {
+        "class": "org.apache.commons.math.linear.RealMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
+        "loc": "774-774",
+        "config": "MASK_ON",
         "input": "public double[] operate(double[] v) throws IllegalArgumentException {\n    <|mask:0|>\n    final int nCols = this.getColumnDimension();\n    if (v.length != nCols) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final double[] out = new double[v.length];\n    for (int row = 0; row < nRows; row++) {\n        final double[] dataRow = data[row];\n        double sum = 0;\n        for (int i = 0; i < nCols; i++) {\n            sum += dataRow[i] * v[i];\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
         "range": "773,5-789,5"
     },
     {
         "class": "org.apache.commons.math.linear.RealMatrixImpl",
-        "file": "/root/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
+        "loc": "774-774",
+        "config": "MASK_BEFORE",
+        "input": "public double[] operate(double[] v) throws IllegalArgumentException {\n    <|mask:0|>\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    if (v.length != nCols) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final double[] out = new double[v.length];\n    for (int row = 0; row < nRows; row++) {\n        final double[] dataRow = data[row];\n        double sum = 0;\n        for (int i = 0; i < nCols; i++) {\n            sum += dataRow[i] * v[i];\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
+        "range": "773,5-789,5"
+    },
+    {
+        "class": "org.apache.commons.math.linear.RealMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
         "loc": "782-782",
+        "config": "MASK_AFTER",
+        "input": "public double[] operate(double[] v) throws IllegalArgumentException {\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    if (v.length != nCols) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final double[] out = new double[v.length];\n    for (int row = 0; row < nRows; row++) {\n        final double[] dataRow = data[row];\n        double sum = 0;\n        <|mask:0|>\n        for (int i = 0; i < nCols; i++) {\n            sum += dataRow[i] * v[i];\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
+        "range": "773,5-789,5"
+    },
+    {
+        "class": "org.apache.commons.math.linear.RealMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
+        "loc": "782-782",
+        "config": "MASK_ON",
         "input": "public double[] operate(double[] v) throws IllegalArgumentException {\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    if (v.length != nCols) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final double[] out = new double[v.length];\n    for (int row = 0; row < nRows; row++) {\n        final double[] dataRow = data[row];\n        <|mask:0|>\n        for (int i = 0; i < nCols; i++) {\n            sum += dataRow[i] * v[i];\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
         "range": "773,5-789,5"
     },
     {
         "class": "org.apache.commons.math.linear.RealMatrixImpl",
-        "file": "/root/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
+        "loc": "782-782",
+        "config": "MASK_BEFORE",
+        "input": "public double[] operate(double[] v) throws IllegalArgumentException {\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    if (v.length != nCols) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final double[] out = new double[v.length];\n    for (int row = 0; row < nRows; row++) {\n        final double[] dataRow = data[row];\n        <|mask:0|>\n        double sum = 0;\n        for (int i = 0; i < nCols; i++) {\n            sum += dataRow[i] * v[i];\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
+        "range": "773,5-789,5"
+    },
+    {
+        "class": "org.apache.commons.math.linear.RealMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
         "loc": "784-784",
+        "config": "MASK_AFTER",
+        "input": "public double[] operate(double[] v) throws IllegalArgumentException {\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    if (v.length != nCols) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final double[] out = new double[v.length];\n    for (int row = 0; row < nRows; row++) {\n        final double[] dataRow = data[row];\n        double sum = 0;\n        for (int i = 0; i < nCols; i++) {\n            sum += dataRow[i] * v[i];\n            <|mask:0|>\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
+        "range": "773,5-789,5"
+    },
+    {
+        "class": "org.apache.commons.math.linear.RealMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
+        "loc": "784-784",
+        "config": "MASK_ON",
         "input": "public double[] operate(double[] v) throws IllegalArgumentException {\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    if (v.length != nCols) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final double[] out = new double[v.length];\n    for (int row = 0; row < nRows; row++) {\n        final double[] dataRow = data[row];\n        double sum = 0;\n        for (int i = 0; i < nCols; i++) {\n            <|mask:0|>\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
+        "range": "773,5-789,5"
+    },
+    {
+        "class": "org.apache.commons.math.linear.RealMatrixImpl",
+        "file": "/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java/org/apache/commons/math/linear/RealMatrixImpl.java",
+        "loc": "784-784",
+        "config": "MASK_BEFORE",
+        "input": "public double[] operate(double[] v) throws IllegalArgumentException {\n    final int nRows = this.getRowDimension();\n    final int nCols = this.getColumnDimension();\n    if (v.length != nCols) {\n        throw new IllegalArgumentException(\"vector has wrong length\");\n    }\n    final double[] out = new double[v.length];\n    for (int row = 0; row < nRows; row++) {\n        final double[] dataRow = data[row];\n        double sum = 0;\n        for (int i = 0; i < nCols; i++) {\n            <|mask:0|>\n            sum += dataRow[i] * v[i];\n        }\n        out[row] = sum;\n    }\n    return out;\n}\n<|mask:0|>",
         "range": "773,5-789,5"
     }
 ]
