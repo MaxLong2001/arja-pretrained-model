@@ -11,9 +11,9 @@ if __name__ == '__main__':
     bug_src_arg = sys.argv[1]
     fault_json_arg = sys.argv[2]
     output_json_arg = sys.argv[3]
-    # bug_src_arg = 'D:\\PyCharmProject\\test-packages\\buggy\\Math\\math_98_buggy\\src\\main\\java'
-    # fault_json_arg = 'D:\\PyCharmProject\\arja-pretrained-model\\files\\faults.json'
-    # output_json_arg = 'D:\\PyCharmProject\\arja-pretrained-model\\files\\output-after-parsed.json'
+    # bug_src_arg = '/home/LAB/longyz/d4j-projs/Lang/lang_7_buggy/src/main/java'
+    # fault_json_arg = '/home/LAB/longyz/codefix/arja-pretrained-model/files/faults.json'
+    # output_json_arg = '/home/LAB/longyz/codefix/arja-pretrained-model/files/output.json'
     print('arja-pretrained-model: bug_src: ', bug_src_arg)
     print('arja-pretrained-model: fault_json: ', fault_json_arg)
     print('arja-pretrained-model: output_json: ', output_json_arg)
@@ -28,7 +28,7 @@ if __name__ == '__main__':
 
     print('arja-pretrained-model: generating input')
     GeneratePatch.generate_input(fault_locations=faulty,
-                                 mask_config={'MASK_ON'},
+                                 mask_config={'MASK_ON', 'MASK_BEFORE', 'MASK_AFTER'},
                                  input_file=GeneratePatch.TMP_FILE,
                                  output_file=GeneratePatch.INPUT_JSON)
 

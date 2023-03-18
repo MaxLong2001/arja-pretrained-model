@@ -8,6 +8,7 @@ BUG_SRC = ''
 FAULT_JSON = ''
 OUTPUT_JSON = ''
 
+USER_ROOT = ''
 PROJ_ROOT = ''
 JASPER_ROOT = ''
 FILES_ROOT = ''
@@ -18,13 +19,14 @@ MODEL = ''
 
 def setup_global(bug_src, fault_json, output_json):
     global BUG_SRC, FAULT_JSON, OUTPUT_JSON, \
-        PROJ_ROOT, JASPER_ROOT, FILES_ROOT, INPUT_JSON, TMP_FILE, MODEL
+        USER_ROOT, PROJ_ROOT, JASPER_ROOT, FILES_ROOT, INPUT_JSON, TMP_FILE, MODEL
 
+    USER_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
     PROJ_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    JASPER_ROOT = PROJ_ROOT + '\\jasper'
-    FILES_ROOT = PROJ_ROOT + '\\files'
-    INPUT_JSON = FILES_ROOT + '\\input.json'
-    TMP_FILE = FILES_ROOT + '\\tmp.json'
+    JASPER_ROOT = PROJ_ROOT + '/jasper'
+    FILES_ROOT = PROJ_ROOT + '/files'
+    INPUT_JSON = FILES_ROOT + '/input.json'
+    TMP_FILE = FILES_ROOT + '/tmp.json'
     MODEL = 'facebook/incoder-1B'
 
     BUG_SRC = bug_src
@@ -39,7 +41,7 @@ def get_faulty(fault_file):
     for line in fault_json:
         fault_locations.append({
             'class': line['class'],
-            'file': BUG_SRC + '\\' + line['class'].replace('.', '\\') + '.java',
+            'file': BUG_SRC + '/' + line['class'].replace('.', '/') + '.java',
             'line': line['line'],
             'suspicious': line['suspicious'],
         })
@@ -48,7 +50,7 @@ def get_faulty(fault_file):
 
 def generate_input(fault_locations, mask_config, input_file, output_file):
     incoder_input = []
-    compile_jasper()
+    # compile_jasper()
 
     for it in fault_locations:
         faulty_file = it['file']
@@ -56,6 +58,7 @@ def generate_input(fault_locations, mask_config, input_file, output_file):
         faulty_class = it['class']
 
         for config in mask_config:
+            print('input:', faulty_class, '#', line, '#', config)
             get_incoder_input(faulty_file, line, line, input_file, config)
             result = json.load(open(input_file, 'r'))
             incoder_input.append({
@@ -81,18 +84,18 @@ def command(cmd):
 
 
 def compile_jasper():
-    if os.path.exists(JASPER_ROOT + '\\target'):
+    if os.path.exists(JASPER_ROOT + '/target'):
         return
     os.chdir(JASPER_ROOT)
     os.mkdir('target')
-    command(['javac', '-cp', 'lib\\*', '-d', 'target',
-             'src\\main\\java\\clm\\jasper\\*.java', 'src\\main\\java\\clm\\incoder\\*.java'])
+    command([USER_ROOT + '/env/jdk1.8/bin/javac', '-cp', '\".:lib/*\"', '-d', 'target',
+             'src/main/java/clm/jasper/*.java', 'src/main/java/clm/incoder/*.java'])
 
 
 def get_incoder_input(filename, start, end, tmp_file, config):
     os.chdir(JASPER_ROOT)
     command([
-        'java', '-cp', '\".;lib\\*;target\"', 'clm.incoder.InCoderInputParser',
+        USER_ROOT + '/env/jdk1.8/bin/java', '-cp', '.:target:lib/*', 'clm.incoder.InCoderInputParser',
         filename, str(start), str(end), config, tmp_file
     ])
 
@@ -113,7 +116,7 @@ def generate_patch(input_file,
         loc = int(item['loc'].split('-')[0])
         faulty_class = item['class']
         config = item['config']
-        print(faulty_class, '#', loc)
+        print('output: ', faulty_class, '#', loc, '#', config)
 
         input_ids = tokenizer(content, return_tensors="pt").input_ids
         if input_ids.size(1) >= 1024:
@@ -166,7 +169,8 @@ def parse_generation(output):
             if lbrace_cnt == rbrace_cnt and lbrace_cnt != 0:
                 result_str = generation[:i + 1]
                 break
-    elif generation.startswith(')') or generation.startswith(']') or generation.startswith('}'):
+    elif generation.startswith(')') or generation.startswith(']') or generation.startswith('}') or \
+        generation.startswith('<|endofmask|>') or generation.startswith('</code>'):
         result_str = ''
     else:
         result_str = generation.split(';')[0] + ';'
