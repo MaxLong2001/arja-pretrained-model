@@ -3,17 +3,17 @@ import GeneratePatch
 
 if __name__ == '__main__':
     # necessary args: fault_json, bug_src, output_json
-    # if len(sys.argv) != 4:
-    #     print('arja-pretrained-model: invalid argument number, expected 3, got ', len(sys.argv) - 1)
-    #     exit(1)
+    if len(sys.argv) != 4:
+        print('arja-pretrained-model: invalid argument number, expected 3, got ', len(sys.argv) - 1)
+        exit(1)
 
-    # print('arja-pretrained-model: getting args')
-    # bug_src_arg = sys.argv[1]
-    # fault_json_arg = sys.argv[2]
-    # output_json_arg = sys.argv[3]
-    bug_src_arg = '/home/LAB/longyz/d4j-projs/Math/math_98_buggy/src/main/java'
-    fault_json_arg = '/home/LAB/longyz/codefix/arja-pretrained-model/files/faults.json'
-    output_json_arg = '/home/LAB/longyz/codefix/arja-pretrained-model/files/output.json'
+    print('arja-pretrained-model: getting args')
+    bug_src_arg = sys.argv[1]
+    fault_json_arg = sys.argv[2]
+    output_json_arg = sys.argv[3]
+    # bug_src_arg = '/home/LAB/longyz/d4j-projs/Lang/lang_7_buggy/src/main/java'
+    # fault_json_arg = '/home/LAB/longyz/codefix/arja-pretrained-model/files/faults.json'
+    # output_json_arg = '/home/LAB/longyz/codefix/arja-pretrained-model/files/output.json'
     print('arja-pretrained-model: bug_src: ', bug_src_arg)
     print('arja-pretrained-model: fault_json: ', fault_json_arg)
     print('arja-pretrained-model: output_json: ', output_json_arg)
