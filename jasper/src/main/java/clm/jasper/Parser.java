@@ -366,6 +366,7 @@ public class Parser {
                 break;
         }
         br.close();
+        code = removeCodeComments(code);
         return code;
     }
 
@@ -400,5 +401,30 @@ public class Parser {
         if (! node.getTokenRange().isPresent())
             return -1;
         return node.getTokenRange().get().iterator().next().getRange().get().begin.column - 1;
+    }
+
+    public static String removeCodeComments(String code) {
+        StringBuilder result = new StringBuilder();
+        char[] chars = code.toCharArray();
+        boolean inFormatString = false;
+        for (int i = 0; i < chars.length; i++) {
+            if (inFormatString) {
+                if (chars[i] == '"') {
+                    inFormatString = false;
+                }
+                result.append(chars[i]);
+                continue;
+            }
+            if (chars[i] == '/' && i + 1 < chars.length && chars[i + 1] == '/') {
+                break;
+            }
+            if (chars[i] == '"') {
+                inFormatString = true;
+                result.append(chars[i]);
+                continue;
+            }
+            result.append(chars[i]);
+        }
+        return result.toString();
     }
 }
