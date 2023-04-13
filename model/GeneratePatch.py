@@ -1,6 +1,7 @@
 import json
 import os
 import subprocess
+import sys
 
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
@@ -174,9 +175,53 @@ def parse_generation(output):
         result_str = ''
     else:
         result_str = generation.split(';')[0] + ';'
+    result_str = result_str.replace('\n', '')
+    result_str = result_str.replace('\r', '')
+    result_str = result_str.replace('\t', '')
     return result_str
 
 
 def cleanup_file(file):
     if os.path.exists(file):
         os.remove(file)
+
+
+if __name__ == '__main__':
+    # necessary args: fault_json, bug_src, output_json
+    if len(sys.argv) != 4:
+        print('arja-pretrained-model: invalid argument number, expected 3, got ', len(sys.argv) - 1)
+        exit(1)
+
+    print('arja-pretrained-model: getting args')
+    bug_src_arg = sys.argv[1]
+    fault_json_arg = sys.argv[2]
+    output_json_arg = sys.argv[3]
+    # bug_src_arg = '/home/LAB/longyz/d4j-projs/Math-scp/math_1_buggy/src/main/java'
+    # fault_json_arg = '/home/LAB/longyz/codefix/arja-pretrained-model/files/faults.json'
+    # output_json_arg = '/home/LAB/longyz/codefix/arja-pretrained-model/files/output.json'
+    print('arja-pretrained-model: bug_src: ', bug_src_arg)
+    print('arja-pretrained-model: fault_json: ', fault_json_arg)
+    print('arja-pretrained-model: output_json: ', output_json_arg)
+
+    print('arja-pretrained-model: setting up global variables')
+    setup_global(bug_src=bug_src_arg,
+                 fault_json=fault_json_arg,
+                 output_json=output_json_arg)
+
+    print('arja-pretrained-model: getting faulty')
+    faulty = get_faulty(fault_file=FAULT_JSON)
+
+    print('arja-pretrained-model: generating input')
+    generate_input(fault_locations=faulty,
+                   mask_config={'MASK_ON', 'MASK_BEFORE', 'MASK_AFTER'},
+                   input_file=TMP_FILE,
+                   output_file=INPUT_JSON)
+
+    print('arja-pretrained-model: generating patch')
+    generate_patch(input_file=INPUT_JSON,
+                   output_file=OUTPUT_JSON,
+                   model_name=MODEL,
+                   num_output=10)
+
+    print('arja-pretrained-model: cleaning up')
+    cleanup_file(TMP_FILE)
