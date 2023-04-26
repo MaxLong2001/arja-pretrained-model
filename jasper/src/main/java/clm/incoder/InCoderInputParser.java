@@ -4,6 +4,11 @@ import clm.jasper.ContextParser;
 import clm.jasper.Parser;
 import com.github.javaparser.Range;
 import com.github.javaparser.ast.Node;
+import org.eclipse.jdt.core.ToolFactory;
+import org.eclipse.jdt.core.formatter.CodeFormatter;
+import org.eclipse.jface.text.Document;
+import org.eclipse.jface.text.IDocument;
+import org.eclipse.text.edits.TextEdit;
 
 public class InCoderInputParser {
     public static InCoderInput getInCoderInput(String filename, int startLine, int endLine, InCoderConfig config) {
@@ -18,6 +23,38 @@ public class InCoderInputParser {
             String buggyLine = ContextParser.getDedentedCode(filename, startLine, endLine, true);
             int buggyLineIndent = Parser.getIndent(filename, startLine);
             int buggyFunctionIndent = Parser.getIndent(buggyFunctionNode);
+
+            String completeFunction = buggyFunctionBefore + buggyLine + buggyFunctionAfter;
+            CodeFormatter codeFormatter = ToolFactory.createCodeFormatter(null);
+            TextEdit textEdit = codeFormatter.format(
+                    CodeFormatter.K_CLASS_BODY_DECLARATIONS,
+                    completeFunction,
+                    0,
+                    completeFunction.length(),
+                    buggyFunctionIndent,
+                    null);
+            IDocument doc = new Document(completeFunction);
+            try {
+                textEdit.apply(doc);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            String formattedFunction = doc.get();
+            String[] lines = formattedFunction.split("\n");
+            buggyFunctionBefore = "";
+            buggyFunctionAfter = "";
+            int buggyLineIndex = -1;
+            for (int i = 0; i < lines.length; i += 1) {
+                if (lines[i].contains(buggyLine.trim())) {
+                    buggyLineIndex = i;
+                    buggyLine = lines[i];
+                    break;
+                }
+            }
+            for (int i = 0; i < buggyLineIndex; i += 1)
+                buggyFunctionBefore += lines[i] + "\n";
+            for (int i = buggyLineIndex + 1; i < lines.length; i += 1)
+                buggyFunctionAfter += lines[i] + "\n";
 
             input = buggyFunctionBefore + "\n";
             if (config == InCoderConfig.MASK_ON) {
