@@ -2,6 +2,7 @@ import json
 import os
 import subprocess
 import sys
+import re
 
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
@@ -22,12 +23,13 @@ def setup_global(bug_src, fault_json, output_json):
     global BUG_SRC, FAULT_JSON, OUTPUT_JSON, \
         USER_ROOT, PROJ_ROOT, JASPER_ROOT, FILES_ROOT, INPUT_JSON, TMP_FILE, MODEL
 
+    BUGGY_NAME = re.search(r'[a-z]*_[0-9]*_buggy', bug_src).group()
     USER_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
     PROJ_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     JASPER_ROOT = PROJ_ROOT + '/jasper'
     FILES_ROOT = PROJ_ROOT + '/files'
-    INPUT_JSON = FILES_ROOT + '/input.json'
-    TMP_FILE = FILES_ROOT + '/tmp.json'
+    INPUT_JSON = FILES_ROOT + '/input_' + BUGGY_NAME + '.json'
+    TMP_FILE = FILES_ROOT + '/tmp_' + BUGGY_NAME + '.json'
     MODEL = 'facebook/incoder-1B'
 
     BUG_SRC = bug_src
@@ -223,5 +225,6 @@ if __name__ == '__main__':
                    model_name=MODEL,
                    num_output=10)
 
-    print('arja-pretrained-model: cleaning up')
-    cleanup_file(TMP_FILE)
+    # print('arja-pretrained-model: cleaning up')
+    # cleanup_file(TMP_FILE)
+    # cleanup_file(INPUT_JSON)
