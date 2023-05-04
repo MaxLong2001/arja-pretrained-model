@@ -3,6 +3,7 @@ import os
 import subprocess
 import sys
 import re
+import uuid
 
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
@@ -23,7 +24,10 @@ def setup_global(bug_src, fault_json, output_json):
     global BUG_SRC, FAULT_JSON, OUTPUT_JSON, \
         USER_ROOT, PROJ_ROOT, JASPER_ROOT, FILES_ROOT, INPUT_JSON, TMP_FILE, MODEL
 
-    BUGGY_NAME = re.search(r'[a-z]*_[0-9]*_buggy', bug_src).group()
+    if re.search(r'[a-z]*_[0-9]*_buggy', bug_src) != None:
+        BUGGY_NAME = re.search(r'[a-z]*_[0-9]*_buggy', bug_src).group()
+    else:
+        BUGGY_NAME = str(uuid.uuid4())[0:5]
     USER_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
     PROJ_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     JASPER_ROOT = PROJ_ROOT + '/jasper'
@@ -45,7 +49,8 @@ def get_faulty(fault_file):
         fault_locations.append({
             'class': line['class'],
             'file': BUG_SRC + '/' + line['class'].replace('.', '/') + '.java',
-            'line': line['line'],
+            'startLine': line['startLine'],
+            'endLine': line['endLine'],
             'suspicious': line['suspicious'],
         })
     return fault_locations
@@ -57,17 +62,18 @@ def generate_input(fault_locations, mask_config, input_file, output_file):
 
     for it in fault_locations:
         faulty_file = it['file']
-        line = it['line']
+        startLine = it['startLine']
+        endLine = it['endLine']
         faulty_class = it['class']
 
         for config in mask_config:
-            print('input:', faulty_class, '#', line, '#', config)
-            get_incoder_input(faulty_file, line, line, input_file, config)
+            print('input:', faulty_class, '#', startLine, '#', config)
+            get_incoder_input(faulty_file, startLine, endLine, input_file, config)
             result = json.load(open(input_file, 'r'))
             incoder_input.append({
                 'class': faulty_class,
                 'file': faulty_file,
-                'loc': '' + str(line) + '-' + str(line),
+                'loc': '' + str(startLine) + '-' + str(endLine),
                 'config': config,
                 'input': result['input'],
                 'range': result['function range'],
@@ -116,7 +122,7 @@ def generate_patch(input_file,
 
     for item in incoder_input:
         content = item['input']
-        loc = int(item['loc'].split('-')[0])
+        loc = item['loc']
         faulty_class = item['class']
         config = item['config']
         print('output: ', faulty_class, '#', loc, '#', config)
