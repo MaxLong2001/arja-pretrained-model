@@ -361,7 +361,7 @@ public class Parser {
         while ((line = br.readLine()) != null) {
             cnt += 1;
             if (startLine <= cnt && cnt <= endLine)
-                code += line;
+                code += line + "\n";
             if (cnt > endLine)
                 break;
         }
@@ -406,8 +406,16 @@ public class Parser {
     public static String removeCodeComments(String code) {
         StringBuilder result = new StringBuilder();
         char[] chars = code.toCharArray();
+        boolean inCommentBlock = false;
         boolean inFormatString = false;
         for (int i = 0; i < chars.length; i++) {
+            if (inCommentBlock) {
+                if (chars[i] == '*' && i + 1 < chars.length && chars[i + 1] == '/') {
+                    inCommentBlock = false;
+                    i += 1;
+                }
+                continue;
+            }
             if (inFormatString) {
                 if (chars[i] == '"') {
                     inFormatString = false;
@@ -417,6 +425,11 @@ public class Parser {
             }
             if (chars[i] == '/' && i + 1 < chars.length && chars[i + 1] == '/') {
                 break;
+            }
+            if (chars[i] == '/' && i + 1 < chars.length && chars[i + 1] == '*') {
+                inCommentBlock = true;
+                i += 1;
+                continue;
             }
             if (chars[i] == '"') {
                 inFormatString = true;
